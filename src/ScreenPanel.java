@@ -37,11 +37,11 @@ public class ScreenPanel extends JPanel implements KeyListener{
 		bufferGraphics.setColor(Color.white);
 		bufferGraphics.fillRect(0, 0, getWidth(), getHeight());
 		
-		mainLoop();
+		mainLoop(g);
 	}
 	
-	public void mainLoop(){
-		
+	public void mainLoop(Graphics g){
+		map.draw(g);
 	}
 
 	
