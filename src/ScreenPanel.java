@@ -22,6 +22,7 @@ public class ScreenPanel extends JPanel implements KeyListener{
 		MListener mlist = new MListener();
 		addMouseListener(mlist);
 		addMouseMotionListener(mlist);
+		this.addKeyListener(this);
 		init();
 	}
 	
@@ -41,6 +42,7 @@ public class ScreenPanel extends JPanel implements KeyListener{
 	}
 	
 	public void mainLoop(Graphics g){
+		System.out.println("MainLoop called");
 		map.draw(g);
 	}
 
@@ -52,9 +54,16 @@ public class ScreenPanel extends JPanel implements KeyListener{
 	}
 	
 	@Override
-	public void keyPressed(KeyEvent arg0) {
-		// TODO Auto-generated method stub
-		
+	public void keyPressed(KeyEvent k) {
+		System.out.println("KeyPressed event: "+k);
+		if(k.getKeyCode() == KeyEvent.VK_A)
+			map.getChar().move(-3, 0);
+		else if(k.getKeyCode() == KeyEvent.VK_W)
+			map.getChar().move(0, -3);
+		else if(k.getKeyCode() == KeyEvent.VK_D)
+			map.getChar().move(3, 0);
+		else if(k.getKeyCode() == KeyEvent.VK_S)
+			map.getChar().move(0, 3);
 	}
 
 	@Override

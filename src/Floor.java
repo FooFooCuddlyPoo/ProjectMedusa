@@ -1,16 +1,18 @@
 import java.awt.Graphics;
-import java.awt.image.BufferedImage;
 
 
-public class Block implements Tile{
+public class Floor implements Tile{
+
 	private int x;
 	private int y;
 	
 	private Sprite img;
 	
-	public Block(int x, int y){
+	public Floor(int x, int y){
 		this.x = x;
 		this.y = y;
+		
+		img = new Sprite("Sprites/floor.png");
 	}
 	
 	public int getX() {
@@ -31,8 +33,6 @@ public class Block implements Tile{
 
 	@Override
 	public void draw(Graphics g) {
-		//img.draw(g, x, y, Tile.TILE_WIDTH, Tile.TILE_HEIGHT);
-		g.drawRect(x, y, Tile.TILE_WIDTH, Tile.TILE_HEIGHT);
+		img.draw(g, x, y, Tile.TILE_WIDTH, Tile.TILE_HEIGHT);
 	}
-	
 }

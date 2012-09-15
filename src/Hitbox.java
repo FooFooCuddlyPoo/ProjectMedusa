@@ -1,5 +1,6 @@
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Rectangle;
 
 public class Hitbox<E> {
 
@@ -52,8 +53,8 @@ public class Hitbox<E> {
 
 	// Checks collision
 
-	public boolean collisionCheck(E Hitbox) {
-		return false;
+	public boolean collisionCheck(Hitbox h) {
+		return new Rectangle(this.x, this.y, this.width, this.height).intersects(new Rectangle(h.x, h.y, h.width, h.height));
 	}
 
 	public boolean collisionCheck(int x, int y) {

@@ -11,6 +11,8 @@ public class Map {
 	private int width;
 	private int height;
 	
+	private Character character;
+	
 	public Map(String filename){
 		file = filename;
 		readMap();
@@ -24,9 +26,19 @@ public class Map {
 			
 			tiles = new Tile[height][width];
 			
+			int temp;
+			
 			for(int h = 0; h < height; h++){
 				for(int w = 0; w < width; w++){
-					tiles[h][w] = getTileType(scan.nextInt(), w, h);
+					temp = scan.nextInt();
+					
+					if(temp == 2){
+						tiles[h][w] = new Floor(w*Tile.TILE_WIDTH, h*Tile.TILE_HEIGHT);
+						character   = new Character(w*Tile.TILE_WIDTH, h*Tile.TILE_HEIGHT);
+					}
+					else{
+						tiles[h][w] = getTileType(temp, w, h);
+					}
 				}
 			}
 			
@@ -44,11 +56,16 @@ public class Map {
 					tiles[h][w].draw(g);
 			}
 		}
+		
+		if(character != null)
+			character.draw(g);
 	}
 	
 	private Tile getTileType(int num, int x, int y) {
 		if(num == 1)
-			return new Block(x*Tile.TILE_WIDTH, y*Tile.TILE_HEIGHT);
+			return new Wall(x*Tile.TILE_WIDTH, y*Tile.TILE_HEIGHT);
+		else if(num == 0)
+			return new Floor(x*Tile.TILE_WIDTH, y*Tile.TILE_HEIGHT);
 		else
 			return null;
 	}
@@ -59,5 +76,13 @@ public class Map {
 	
 	public void setTiles(Tile[][] tiles) {
 		this.tiles = tiles;
+	}
+
+	public Character getChar() {
+		return character;
+	}
+
+	public void setChar(Character character) {
+		this.character = character;
 	}
 }
