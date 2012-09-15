@@ -22,6 +22,11 @@ public class ScreenPanel extends JPanel implements KeyListener{
 		MListener mlist = new MListener();
 		addMouseListener(mlist);
 		addMouseMotionListener(mlist);
+		init();
+	}
+	
+	public void init(){
+		map = new Map("Levels/testLevel.txt");
 	}
 	
 	public void paintComponent(Graphics g){

@@ -31,7 +31,8 @@ public class Block implements Tile{
 
 	@Override
 	public void draw(Graphics g) {
-		img.draw(g, x, y, Tile.TILE_WIDTH, Tile.TILE_HEIGHT);
+		//img.draw(g, x, y, Tile.TILE_WIDTH, Tile.TILE_HEIGHT);
+		g.drawRect(x, y, Tile.TILE_WIDTH, Tile.TILE_HEIGHT);
 	}
 	
 }

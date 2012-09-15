@@ -10,8 +10,9 @@ public class Map {
 	private int width;
 	private int height;
 	
-	public Map(){
-		
+	public Map(String filename){
+		file = filename;
+		readMap();
 	}
 	
 	public void readMap(){
