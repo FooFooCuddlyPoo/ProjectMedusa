@@ -11,7 +11,7 @@ import java.awt.event.MouseMotionListener;
 import javax.swing.*;
 
 
-public class ScreenPanel extends JPanel implements KeyListener{
+public class ScreenPanel extends JPanel implements KeyListener, Runnable{
 
 	private Map map;
 	private Graphics2D bufferGraphics;
@@ -31,17 +31,19 @@ public class ScreenPanel extends JPanel implements KeyListener{
 	}
 	
 	public void paintComponent(Graphics g){
+		
 		requestFocusInWindow();
 		Graphics2D g2d = (Graphics2D) g;
 		Image offscreen = createImage(getWidth(), getHeight());
 		bufferGraphics = (Graphics2D) offscreen.getGraphics();
 		bufferGraphics.setColor(Color.white);
 		bufferGraphics.fillRect(0, 0, getWidth(), getHeight());
-		
-		mainLoop(g);
+		mainLoop(bufferGraphics);
+		g2d.drawImage(offscreen, 0, 0, this);
+
 	}
 	
-	public void mainLoop(Graphics g){
+	public void mainLoop(Graphics2D g){
 		System.out.println("MainLoop called");
 		map.draw(g);
 	}
@@ -49,7 +51,8 @@ public class ScreenPanel extends JPanel implements KeyListener{
 	
 	public void run(){
 		while(true){
-			repaint();
+			System.out.println("PRINTING");
+			super.repaint();
 		}
 	}
 	
@@ -62,8 +65,11 @@ public class ScreenPanel extends JPanel implements KeyListener{
 			map.getChar().move(0, -3);
 		else if(k.getKeyCode() == KeyEvent.VK_D)
 			map.getChar().move(3, 0);
-		else if(k.getKeyCode() == KeyEvent.VK_S)
-			map.getChar().move(0, 3);
+		else if(k.getKeyCode() == KeyEvent.VK_S){
+			map.getChar().move(0, 3);}
+		else{
+			map.getChar().move(2,3);
+		}
 	}
 
 	@Override

@@ -39,7 +39,7 @@ public class Character {
 	}
 	
 	public void draw(Graphics g){
-		//img.draw(g, x, y, CHAR_WIDTH, CHAR_HEIGHT);
-		g.fillRect(x, y, CHAR_WIDTH, CHAR_HEIGHT);
+		img.draw(g, x, y, CHAR_WIDTH, CHAR_HEIGHT);
+		//g.fillRect(x, y, CHAR_WIDTH, CHAR_HEIGHT);/
 	}
 }
