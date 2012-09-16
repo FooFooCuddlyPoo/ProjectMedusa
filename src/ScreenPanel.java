@@ -13,11 +13,8 @@ import java.awt.event.MouseMotionListener;
 import javax.swing.*;
 
 
-@SuppressWarnings("serial")
-public class ScreenPanel extends JPanel implements KeyListener{
-	
-	private static final int FPS  = 30;
-	private static final int TICK = 1000/FPS;
+
+public class ScreenPanel extends JPanel implements KeyListener, Runnable{
 
 
 	private Map map;
@@ -46,30 +43,25 @@ public class ScreenPanel extends JPanel implements KeyListener{
 		bufferGraphics = (Graphics2D) offscreen.getGraphics();
 		bufferGraphics.setColor(Color.white);
 		bufferGraphics.fillRect(0, 0, getWidth(), getHeight());
-		
+
+		mainLoop(bufferGraphics);
 		g2d.drawImage(offscreen, 0, 0, this);
-		gameDraw(g);
-		
+
 	}
 	
-	public void gameDraw(Graphics g){
-		System.out.println("drawing method called called");
-
+	public void mainLoop(Graphics2D g){
 		map.draw(g);
 	}
 
 	
 	public void run(){
-
 		while(true){
-			System.out.println("PRINTING");
 			super.repaint();
 		}
 	}
 	
 	@Override
 	public void keyPressed(KeyEvent k) {
-		System.out.println("KeyPressed event: "+k);
 		if(k.getKeyCode() == KeyEvent.VK_A)
 			map.getChar().move(-3, 0);
 		else if(k.getKeyCode() == KeyEvent.VK_W)

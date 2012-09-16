@@ -60,7 +60,6 @@ public class Map {
 		
 		if(character != null){
 			character.draw(g);
-			System.out.println("DRAW CHAR");
 		}
 			
 	}

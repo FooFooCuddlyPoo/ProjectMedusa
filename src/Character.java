@@ -17,10 +17,8 @@ public class Character {
 	}
 	
 	public void move(int x, int y){
-		System.out.println("move called x:"+x+" and y: "+y);
 		this.x += x;
 		this.y += y;
-		System.out.println(this);
 	}
 
 	public int getX() {
@@ -44,7 +42,7 @@ public class Character {
 	}
 	
 	public void draw(Graphics g){
-		img.draw(g, x, y, CHAR_WIDTH, CHAR_HEIGHT);
-		//g.fillRect(x, y, CHAR_WIDTH, CHAR_HEIGHT);/
+		//img.draw(g, x, y, CHAR_WIDTH, CHAR_HEIGHT);
+		g.fillRect(x, y, CHAR_WIDTH, CHAR_HEIGHT);
 	}
 }
