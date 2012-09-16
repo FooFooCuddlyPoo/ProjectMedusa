@@ -9,4 +9,6 @@ public interface Tile {
 	
 	public int getX();
 	public int getY();
+	
+	public Hitbox getHitbox();
 }

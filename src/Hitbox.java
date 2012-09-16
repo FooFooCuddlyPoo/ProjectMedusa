@@ -2,7 +2,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 
-public class Hitbox<E> {
+public class Hitbox{
 
 	private int x;
 	private int y;
