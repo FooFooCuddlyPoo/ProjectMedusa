@@ -19,6 +19,7 @@ public class ScreenPanel extends JPanel implements KeyListener{
 	private static final int FPS  = 30;
 	private static final int TICK = 1000/FPS;
 
+
 	private Map map;
 	private Graphics2D bufferGraphics;
 	private long lastTime;
@@ -38,8 +39,7 @@ public class ScreenPanel extends JPanel implements KeyListener{
 	}
 	
 	public void paintComponent(Graphics g){
-		super.paintComponent(g);
-		System.out.println("paintComponenet cakkkled");
+
 		requestFocusInWindow();
 		Graphics2D g2d = (Graphics2D) g;
 		Image offscreen = createImage(getWidth(), getHeight());
@@ -54,18 +54,16 @@ public class ScreenPanel extends JPanel implements KeyListener{
 	
 	public void gameDraw(Graphics g){
 		System.out.println("drawing method called called");
+
 		map.draw(g);
 	}
 
 	
 	public void run(){
-		while (true){
-			long current = System.currentTimeMillis();
-			if (current - lastTime > TICK) {
-				repaint();
-				lastTime = current;
-			}
-			
+
+		while(true){
+			System.out.println("PRINTING");
+			super.repaint();
 		}
 	}
 	
@@ -78,10 +76,12 @@ public class ScreenPanel extends JPanel implements KeyListener{
 			map.getChar().move(0, -3);
 		else if(k.getKeyCode() == KeyEvent.VK_D)
 			map.getChar().move(3, 0);
-		else if(k.getKeyCode() == KeyEvent.VK_S)
-			map.getChar().move(0, 3);
-		
-		map.draw(bufferGraphics);
+
+		else if(k.getKeyCode() == KeyEvent.VK_S){
+			map.getChar().move(0, 3);}
+		else{
+			map.getChar().move(2,3);
+		}
 	}
 
 	@Override

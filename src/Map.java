@@ -2,6 +2,7 @@ import java.awt.Graphics;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
+import java.awt.*;
 
 
 public class Map {
@@ -49,7 +50,7 @@ public class Map {
 		
 	}
 	
-	public void draw(Graphics g){
+	public void draw(Graphics2D g){
 		for(int h = 0; h < tiles.length; h++){
 			for(int w = 0; w < tiles[0].length; w++){
 				if(tiles[h][w] != null)
@@ -57,8 +58,11 @@ public class Map {
 			}
 		}
 		
-		if(character != null)
+		if(character != null){
 			character.draw(g);
+			System.out.println("DRAW CHAR");
+		}
+			
 	}
 	
 	private Tile getTileType(int num, int x, int y) {
