@@ -21,9 +21,7 @@ public class Sprite {
 	}
 	
 	public void draw(Graphics g, int x, int y, int width, int height, int spriteStage, int direction){
-		System.out.println("spriteStage*width, "+ spriteStage*width+" direction*height, "+direction*height+" width, "+width+" height "+height);
 		BufferedImage temp = img.getSubimage(spriteStage*width, direction*height, width, height);
 		g.drawImage(temp, x, y, width, height, null);
 	}
-	
 }

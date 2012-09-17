@@ -16,7 +16,7 @@ public class Character {
 		this.x = x;
 		this.y = y;
 		
-		img = new Sprite("Sprites/sprites_map_claudius.png");
+		img = new Sprite("Sprites/Character.png");
 		direction = 3;
 		spriteStage = 0;
 	}
@@ -25,7 +25,7 @@ public class Character {
 		this.x += x;
 		this.y += y;
 		this.direction = direction;
-		if(spriteStage >= 0 && spriteStage < 6)
+		if(spriteStage >= 0 && spriteStage < 5)
 			spriteStage++;
 		else
 			spriteStage = 0;
