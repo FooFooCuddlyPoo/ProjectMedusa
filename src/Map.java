@@ -53,13 +53,17 @@ public class Map {
 	public void draw(Graphics2D g){
 		for(int h = 0; h < tiles.length; h++){
 			for(int w = 0; w < tiles[0].length; w++){
-				if(tiles[h][w] != null)
+				if(tiles[h][w] != null){
 					tiles[h][w].draw(g);
+					if(tiles[h][w].getHitbox() != null)
+						tiles[h][w].getHitbox().draw(g);
+				}
 			}
 		}
 		
 		if(character != null){
 			character.draw(g);
+			character.getFeetHitbox().draw(g);
 		}
 			
 	}

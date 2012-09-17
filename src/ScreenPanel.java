@@ -14,13 +14,18 @@ import javax.swing.*;
 
 
 
-public class ScreenPanel extends JPanel implements KeyListener, Runnable{
+public class ScreenPanel extends JPanel implements KeyListener{
 
 
 	private Map map;
 	private Camera camera;
 	private Graphics2D bufferGraphics;
 	private long lastTime;
+	
+	private boolean movingLeft 	= false;
+	private boolean movingUp   	= false;;
+	private boolean movingRight	= false;
+	private boolean movingDown	= false;
 	
 	public ScreenPanel(){
 		setFocusable(true);
@@ -52,35 +57,40 @@ public class ScreenPanel extends JPanel implements KeyListener, Runnable{
 	}
 	
 	public void mainLoop(Graphics2D g){
+		update();
 		g.translate(-camera.getX(), -camera.getY());
 		map.draw(g);
 	}
 
-	
-	public void run(){
-		while(true){
-			super.repaint();
-		}
+	public void update(){
+		map.getChar().move(movingLeft,  movingUp, movingRight, movingDown, map.getTiles());
 	}
 	
 	@Override
 	public void keyPressed(KeyEvent k) {
 		if(k.getKeyCode() == KeyEvent.VK_A)
-			map.getChar().move(-3, 0, 1, map.getTiles());
+			movingLeft = true;
 		if(k.getKeyCode() == KeyEvent.VK_W)
-			map.getChar().move(0, -3, 2,  map.getTiles());
+			movingUp = true;
 		if(k.getKeyCode() == KeyEvent.VK_D)
-			map.getChar().move(3, 0, 3,  map.getTiles());
-		if(k.getKeyCode() == KeyEvent.VK_S){
-			map.getChar().move(0, 3, 0,  map.getTiles());}
+			movingRight = true;
+		if(k.getKeyCode() == KeyEvent.VK_S)
+			movingDown = true;
 		
-		camera.setX(map.getChar().getX());
-		camera.setY(map.getChar().getY());
+		if(k.getKeyCode() == KeyEvent.VK_ESCAPE)
+			System.exit(0);
 	}
 
 	@Override
-	public void keyReleased(KeyEvent arg0) {
-		// TODO Auto-generated method stub
+	public void keyReleased(KeyEvent k) {
+		if(k.getKeyCode() == KeyEvent.VK_A)
+			movingLeft = false;
+		if(k.getKeyCode() == KeyEvent.VK_W)
+			movingUp = false;
+		if(k.getKeyCode() == KeyEvent.VK_D)
+			movingRight = false;
+		if(k.getKeyCode() == KeyEvent.VK_S)
+			movingDown = false;
 		
 	}
 
