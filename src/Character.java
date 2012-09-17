@@ -2,39 +2,41 @@ import java.awt.Graphics;
 
 
 public class Character {
-	public static final int CHAR_WIDTH  = 30;
+	public static final int CHAR_WIDTH  = 32;
 	public static final int CHAR_HEIGHT = 60;
 	private int x;
 	private int y;
 	
 	private Sprite img;
 	
+	private int spriteStage;
+	private int direction;  //0 = down, 1 = left, 2 = up, 3 = right
+	
 	public Character(int x, int y){
 		this.x = x;
 		this.y = y;
 		
 		img = new Sprite("Sprites/sprites_map_claudius.png");
+		direction = 3;
+		spriteStage = 0;
 	}
 	
-	public void move(int x, int y){
+	public void move(int x, int y, int direction){
 		this.x += x;
 		this.y += y;
+		this.direction = direction;
+		if(spriteStage >= 0 && spriteStage < 6)
+			spriteStage++;
+		else
+			spriteStage = 0;
 	}
 
 	public int getX() {
 		return x;
 	}
 
-	public void setX(int x) {
-		this.x = x;
-	}
-
 	public int getY() {
 		return y;
-	}
-
-	public void setY(int y) {
-		this.y = y;
 	}
 	
 	public String toString(){
@@ -42,7 +44,6 @@ public class Character {
 	}
 	
 	public void draw(Graphics g){
-		//img.draw(g, x, y, CHAR_WIDTH, CHAR_HEIGHT);
-		g.fillRect(x, y, CHAR_WIDTH, CHAR_HEIGHT);
+		img.draw(g, x, y, CHAR_WIDTH, CHAR_HEIGHT, spriteStage, direction);
 	}
 }

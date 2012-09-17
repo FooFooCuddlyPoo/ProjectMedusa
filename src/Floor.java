@@ -33,7 +33,7 @@ public class Floor implements Tile{
 
 	@Override
 	public void draw(Graphics g) {
-		img.draw(g, x, y, Tile.TILE_WIDTH, Tile.TILE_HEIGHT);
+		img.draw(g, x, y, Tile.TILE_WIDTH, Tile.TILE_HEIGHT, 0, 0);
 	}
 
 	@Override

@@ -63,17 +63,13 @@ public class ScreenPanel extends JPanel implements KeyListener, Runnable{
 	@Override
 	public void keyPressed(KeyEvent k) {
 		if(k.getKeyCode() == KeyEvent.VK_A)
-			map.getChar().move(-3, 0);
-		else if(k.getKeyCode() == KeyEvent.VK_W)
-			map.getChar().move(0, -3);
-		else if(k.getKeyCode() == KeyEvent.VK_D)
-			map.getChar().move(3, 0);
-
-		else if(k.getKeyCode() == KeyEvent.VK_S){
-			map.getChar().move(0, 3);}
-		else{
-			map.getChar().move(2,3);
-		}
+			map.getChar().move(-3, 0, 1);
+		if(k.getKeyCode() == KeyEvent.VK_W)
+			map.getChar().move(0, -3, 2);
+		if(k.getKeyCode() == KeyEvent.VK_D)
+			map.getChar().move(3, 0, 3);
+		if(k.getKeyCode() == KeyEvent.VK_S){
+			map.getChar().move(0, 3, 0);}
 	}
 
 	@Override
