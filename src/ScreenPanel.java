@@ -18,6 +18,7 @@ public class ScreenPanel extends JPanel implements KeyListener, Runnable{
 
 
 	private Map map;
+	private Camera camera;
 	private Graphics2D bufferGraphics;
 	private long lastTime;
 	
@@ -33,6 +34,7 @@ public class ScreenPanel extends JPanel implements KeyListener, Runnable{
 	
 	public void init(){
 		map = new Map("Levels/testLevel.txt");
+		camera = new Camera(map.getChar().getX() + Character.CHAR_WIDTH/2, map.getChar().getY() + Character.CHAR_HEIGHT/2);
 	}
 	
 	public void paintComponent(Graphics g){
@@ -50,6 +52,7 @@ public class ScreenPanel extends JPanel implements KeyListener, Runnable{
 	}
 	
 	public void mainLoop(Graphics2D g){
+		g.translate(-camera.getX(), -camera.getY());
 		map.draw(g);
 	}
 
@@ -63,13 +66,13 @@ public class ScreenPanel extends JPanel implements KeyListener, Runnable{
 	@Override
 	public void keyPressed(KeyEvent k) {
 		if(k.getKeyCode() == KeyEvent.VK_A)
-			map.getChar().move(-3, 0, 1);
+			map.getChar().move(-3, 0, 1, map.getTiles());
 		if(k.getKeyCode() == KeyEvent.VK_W)
-			map.getChar().move(0, -3, 2);
+			map.getChar().move(0, -3, 2,  map.getTiles());
 		if(k.getKeyCode() == KeyEvent.VK_D)
-			map.getChar().move(3, 0, 3);
+			map.getChar().move(3, 0, 3,  map.getTiles());
 		if(k.getKeyCode() == KeyEvent.VK_S){
-			map.getChar().move(0, 3, 0);}
+			map.getChar().move(0, 3, 0,  map.getTiles());}
 	}
 
 	@Override
