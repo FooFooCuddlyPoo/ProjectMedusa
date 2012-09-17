@@ -9,7 +9,7 @@ public class Camera {
 	}
 
 	public int getX() {
-		return x;
+		return x - ProjectMedusa.SCREEN_WIDTH/2;
 	}
 
 	public void setX(int x) {
@@ -17,7 +17,7 @@ public class Camera {
 	}
 
 	public int getY() {
-		return y;
+		return y - ProjectMedusa.SCREEN_HEIGHT/2;
 	}
 
 	public void setY(int y) {

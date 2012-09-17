@@ -41,7 +41,7 @@ public class Character {
 
 		for (int h = 0; h < tiles.length; h++) {
 			for (int w = 0; w < tiles[0].length; w++) {
-				if (feetHitbox.collisionCheck(tiles[h][w].getHitbox()))
+				if (tiles[h][w].getHitbox() != null && feetHitbox.collisionCheck(tiles[h][w].getHitbox()))
 					return true;
 			}
 		}

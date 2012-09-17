@@ -54,7 +54,10 @@ public class Hitbox{
 	// Checks collision
 
 	public boolean collisionCheck(Hitbox h) {
-		return new Rectangle(this.x, this.y, this.width, this.height).intersects(new Rectangle(h.x, h.y, h.width, h.height));
+
+		Rectangle temp  = new Rectangle(this.x, this.y, this.width, this.height);
+		Rectangle temp2 = new Rectangle(h.x, h.y, h.width, h.height);
+		return temp.intersects(temp2);
 	}
 
 	public boolean collisionCheck(int x, int y) {

@@ -34,7 +34,7 @@ public class ScreenPanel extends JPanel implements KeyListener, Runnable{
 	
 	public void init(){
 		map = new Map("Levels/testLevel.txt");
-		camera = new Camera(map.getChar().getX() + Character.CHAR_WIDTH/2, map.getChar().getY() + Character.CHAR_HEIGHT/2);
+		camera = new Camera(map.getChar().getX(), map.getChar().getY());
 	}
 	
 	public void paintComponent(Graphics g){
@@ -73,6 +73,9 @@ public class ScreenPanel extends JPanel implements KeyListener, Runnable{
 			map.getChar().move(3, 0, 3,  map.getTiles());
 		if(k.getKeyCode() == KeyEvent.VK_S){
 			map.getChar().move(0, 3, 0,  map.getTiles());}
+		
+		camera.setX(map.getChar().getX());
+		camera.setY(map.getChar().getY());
 	}
 
 	@Override
