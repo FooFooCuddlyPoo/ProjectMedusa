@@ -1,12 +1,12 @@
 import java.awt.Graphics;
 
 public class Character {
-	private final int speed = 3;
+	private final double speed = 0.5;
 	
 	public static final int CHAR_WIDTH = 32;
 	public static final int CHAR_HEIGHT = 60;
-	private int x;
-	private int y;
+	private double x;
+	private double y;
 	private Hitbox feetHitbox;
 	private Hitbox bodyHitbox;
 
@@ -14,7 +14,10 @@ public class Character {
 
 	private int spriteStage;
 	private int direction; // 0 = down, 1 = left, 2 = up, 3 = right
-	private boolean moving;
+	private boolean movingDown;
+	private boolean movingLeft;
+	private boolean movingUp;
+	private boolean movingRight;
 
 	public Character(int x, int y) {
 		this.x = x;
@@ -24,30 +27,52 @@ public class Character {
 		img = new Sprite("Sprites/Character.png");
 		direction = 3;
 		spriteStage = 0;
-		moving = false;
 	}
 
 
-	public void move(boolean movingLeft, boolean movingUp, boolean movingRight, boolean movingDown, Tile tiles[][]) {
-
+	public void move(Tile tiles[][]) {
+		
 		if (!checkFeetCollision(tiles)) {
-			if(movingLeft)
+			if(movingLeft){
 				this.x -= speed;
-			if(movingUp)
+				direction = 1;
+				if (spriteStage >= 1 && spriteStage < 5)
+					spriteStage++;
+				else
+					spriteStage = 1;
+			}
+			if(movingUp){
 				this.y -= speed;
-			if(movingRight)
+				direction = 2;
+				if (spriteStage >= 1 && spriteStage < 5)
+					spriteStage++;
+				else
+					spriteStage = 1;
+			}
+			if(movingRight){
 				this.x += speed;
-			if(movingDown)
+				direction = 3;
+				if (spriteStage >= 1 && spriteStage < 5)
+					spriteStage++;
+				else
+					spriteStage = 1;
+			}
+			if(movingDown){
 				this.y += speed;
+				direction = 0;
+				if (spriteStage >= 1 && spriteStage < 5)
+					spriteStage++;
+				else
+					spriteStage = 1;
+			}
 			
-			this.direction = direction;
-			if (spriteStage >= 0 && spriteStage < 5)
-				spriteStage++;
-			else
+			if(!movingUp && !movingRight && !movingLeft && !movingDown)
 				spriteStage = 0;
 			
-			feetHitbox.setX(this.x);
-			feetHitbox.setY(this.y + 40);
+			
+			
+			feetHitbox.setX((int) this.x);
+			feetHitbox.setY((int)this.y + 40);
 		}
 	}
 	
@@ -63,11 +88,11 @@ public class Character {
 	}
 
 	public int getX() {
-		return x;
+		return (int)x;
 	}
 
 	public int getY() {
-		return y;
+		return (int)y;
 	}
 
 	public String toString() {
@@ -75,12 +100,28 @@ public class Character {
 	}
 
 	public void draw(Graphics g) {
-		img.draw(g, x, y, CHAR_WIDTH, CHAR_HEIGHT, spriteStage, direction);
+		img.draw(g, (int)x, (int)y, CHAR_WIDTH, CHAR_HEIGHT, spriteStage, direction);
 	}
 
 
 	public Hitbox getFeetHitbox() {
 		return feetHitbox;
+	}
+
+	public void setMovingRight(boolean movingRight) {
+		this.movingRight = movingRight;
+	}
+
+	public void setMovingUp(boolean movingUp) {
+		this.movingUp = movingUp;
+	}
+
+	public void setMovingLeft(boolean movingLeft) {
+		this.movingLeft = movingLeft;
+	}
+
+	public void setMovingDown(boolean movingDown) {
+		this.movingDown = movingDown;
 	}
 
 }

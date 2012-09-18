@@ -63,19 +63,20 @@ public class ScreenPanel extends JPanel implements KeyListener{
 	}
 
 	public void update(){
-		map.getChar().move(movingLeft,  movingUp, movingRight, movingDown, map.getTiles());
+		map.getChar().move(map.getTiles());
+		camera.setCamera(map.getChar().getX(), map.getChar().getY());
 	}
 	
 	@Override
 	public void keyPressed(KeyEvent k) {
 		if(k.getKeyCode() == KeyEvent.VK_A)
-			movingLeft = true;
+			map.getChar().setMovingLeft(true);
 		if(k.getKeyCode() == KeyEvent.VK_W)
-			movingUp = true;
+			map.getChar().setMovingUp(true);
 		if(k.getKeyCode() == KeyEvent.VK_D)
-			movingRight = true;
+			map.getChar().setMovingRight(true);
 		if(k.getKeyCode() == KeyEvent.VK_S)
-			movingDown = true;
+			map.getChar().setMovingDown(true);
 		
 		if(k.getKeyCode() == KeyEvent.VK_ESCAPE)
 			System.exit(0);
@@ -84,13 +85,13 @@ public class ScreenPanel extends JPanel implements KeyListener{
 	@Override
 	public void keyReleased(KeyEvent k) {
 		if(k.getKeyCode() == KeyEvent.VK_A)
-			movingLeft = false;
+			map.getChar().setMovingLeft(false);
 		if(k.getKeyCode() == KeyEvent.VK_W)
-			movingUp = false;
+			map.getChar().setMovingUp(false);
 		if(k.getKeyCode() == KeyEvent.VK_D)
-			movingRight = false;
+			map.getChar().setMovingRight(false);
 		if(k.getKeyCode() == KeyEvent.VK_S)
-			movingDown = false;
+			map.getChar().setMovingDown(false);
 		
 	}
 
