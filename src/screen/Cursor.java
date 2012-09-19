@@ -7,8 +7,8 @@ import characters.Sprite;
 public class Cursor {
 	private int x;
 	private int y;
-	private final int width  = 64;
-	private final int height = 64;
+	private final int width  = 40;
+	private final int height = 40;
 	private Sprite img;
 	
 	public Cursor(int x, int y){

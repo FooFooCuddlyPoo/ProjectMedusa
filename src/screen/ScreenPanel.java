@@ -112,8 +112,9 @@ public class ScreenPanel extends JPanel implements KeyListener{
 	private class MListener implements MouseListener, MouseMotionListener{
 		
 		@Override
-		public void mouseDragged(MouseEvent arg0) {
-			// TODO Auto-generated method stub
+		public void mouseDragged(MouseEvent m) {
+			mouseX = m.getX();
+			mouseY = m.getY();
 			
 		}
 
