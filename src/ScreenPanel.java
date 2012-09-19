@@ -23,7 +23,7 @@ public class ScreenPanel extends JPanel implements KeyListener{
 	private long lastTime;
 	
 	private boolean movingLeft 	= false;
-	private boolean movingUp   	= false;;
+	private boolean movingUp   	= false;
 	private boolean movingRight	= false;
 	private boolean movingDown	= false;
 	
@@ -39,7 +39,7 @@ public class ScreenPanel extends JPanel implements KeyListener{
 	
 	public void init(){
 		map = new Map("Levels/testLevel.txt");
-		camera = new Camera(map.getChar().getX(), map.getChar().getY());
+		camera = new Camera(map.getChar().getX() + (map.getChar().CHAR_WIDTH/2), map.getChar().getY() + (map.getChar().CHAR_HEIGHT/2));
 	}
 	
 	public void paintComponent(Graphics g){
@@ -64,7 +64,7 @@ public class ScreenPanel extends JPanel implements KeyListener{
 
 	public void update(){
 		map.getChar().move(map.getTiles());
-		camera.setCamera(map.getChar().getX(), map.getChar().getY());
+		camera.setCamera(map.getChar().getX() + (map.getChar().CHAR_WIDTH/2), map.getChar().getY() + (map.getChar().CHAR_HEIGHT));
 	}
 	
 	@Override
