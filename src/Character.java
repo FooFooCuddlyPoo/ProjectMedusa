@@ -69,29 +69,27 @@ public class Character {
 			if(!movingUp && !movingRight && !movingLeft && !movingDown)
 				spriteStage = 0;
 			
-			
-			//Things to improve:
-			// -- Wall collision stuttering
-			// -- Ability to walk through walls with backward movement if partly in wall
-			// -- Collision box looks a bit off for some reason
-			if (checkFeetCollision(tiles)){
-				if (movingUp){
-				this.y += speed+2;
-				}
-				if (movingDown){
-				this.y -= speed+2;
-				}
-				if (movingRight){
-				this.x -= speed+2;
-				}
-				if (movingLeft){
-				this.x += speed+2;
-				}
-			}
-			
 			feetHitbox.setX((int)this.x);
 			feetHitbox.setY((int)this.y + 40);
 		
+			while (checkFeetCollision(tiles)){
+				if (movingLeft)
+					this.x += 2*speed;
+					feetHitbox.setX((int)this.x);
+					feetHitbox.setY((int)this.y + 40);
+				if (movingRight)
+					this.x -= 2*speed;
+					feetHitbox.setX((int)this.x);
+					feetHitbox.setY((int)this.y + 40);
+				if (movingUp)
+					this.y += 2*speed;
+					feetHitbox.setX((int)this.x);
+					feetHitbox.setY((int)this.y + 40);
+				if (movingDown)
+					this.y -= 2*speed;
+					feetHitbox.setX((int)this.x);
+					feetHitbox.setY((int)this.y + 40);
+			}
 	}
 	
 	public boolean checkFeetCollision(Tile[][] tiles) {
