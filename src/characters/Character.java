@@ -1,7 +1,10 @@
+package characters;
 import java.awt.Graphics;
 
+import map.Tile;
+
 public class Character {
-	private final double speed = 0.5;
+	private final double speed = 0.8;
 	
 	public static final int CHAR_WIDTH = 32;
 	public static final int CHAR_HEIGHT = 60;

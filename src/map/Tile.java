@@ -1,4 +1,8 @@
+package map;
+
 import java.awt.Graphics;
+
+import characters.Hitbox;
 
 
 public interface Tile {

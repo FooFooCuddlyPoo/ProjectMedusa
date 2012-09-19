@@ -1,3 +1,6 @@
+package screen;
+import main.ProjectMedusa;
+
 public class Camera {
 
 	private int x;

@@ -1,8 +1,12 @@
+package map;
+
 import java.awt.Graphics;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 import java.awt.*;
+
+import characters.Character;
 
 
 public class Map {

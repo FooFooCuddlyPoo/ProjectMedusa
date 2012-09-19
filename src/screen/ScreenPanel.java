@@ -1,3 +1,4 @@
+package screen;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -12,20 +13,23 @@ import java.awt.event.MouseMotionListener;
 
 import javax.swing.*;
 
+import map.Map;
 
 
+
+
+@SuppressWarnings("serial")
 public class ScreenPanel extends JPanel implements KeyListener{
 
 
 	private Map map;
 	private Camera camera;
+	private Cursor cursor;
+	private int mouseX;
+	private int mouseY;
 	private Graphics2D bufferGraphics;
 	private long lastTime;
-	
-	private boolean movingLeft 	= false;
-	private boolean movingUp   	= false;
-	private boolean movingRight	= false;
-	private boolean movingDown	= false;
+
 	
 	public ScreenPanel(){
 		setFocusable(true);
@@ -40,6 +44,7 @@ public class ScreenPanel extends JPanel implements KeyListener{
 	public void init(){
 		map = new Map("Levels/testLevel.txt");
 		camera = new Camera(map.getChar().getX() + (map.getChar().CHAR_WIDTH/2), map.getChar().getY() + (map.getChar().CHAR_HEIGHT/2));
+		cursor = new Cursor(512, 384);
 	}
 	
 	public void paintComponent(Graphics g){
@@ -60,11 +65,14 @@ public class ScreenPanel extends JPanel implements KeyListener{
 		update();
 		g.translate(-camera.getX(), -camera.getY());
 		map.draw(g);
+		g.translate(camera.getX(), camera.getY());
+		cursor.draw(g);
 	}
 
 	public void update(){
 		map.getChar().move(map.getTiles());
 		camera.setCamera(map.getChar().getX() + (map.getChar().CHAR_WIDTH/2), map.getChar().getY() + (map.getChar().CHAR_HEIGHT));
+		cursor.setCur(mouseX, mouseY);
 	}
 	
 	@Override
@@ -110,9 +118,9 @@ public class ScreenPanel extends JPanel implements KeyListener{
 		}
 
 		@Override
-		public void mouseMoved(MouseEvent arg0) {
-			// TODO Auto-generated method stub
-			
+		public void mouseMoved(MouseEvent m) {
+			mouseX = m.getX();
+			mouseY = m.getY();
 		}
 
 		@Override

@@ -1,22 +1,23 @@
+package map;
+
 import java.awt.Graphics;
-import java.awt.image.BufferedImage;
+
+import characters.Hitbox;
+import characters.Sprite;
 
 
-public class Wall implements Tile{
+public class Floor implements Tile{
+
 	private int x;
 	private int y;
 	
-	private Hitbox h;
-	
 	private Sprite img;
 	
-	public Wall(int x, int y){
+	public Floor(int x, int y){
 		this.x = x;
 		this.y = y;
 		
-		h = new Hitbox(x, y, Tile.TILE_WIDTH, Tile.TILE_HEIGHT);
-		
-		img = new Sprite("Sprites/wall.png");
+		img = new Sprite("Sprites/floor.png");
 	}
 	
 	public int getX() {
@@ -42,7 +43,6 @@ public class Wall implements Tile{
 
 	@Override
 	public Hitbox getHitbox() {
-		return h;
+		return null;
 	}
-	
 }

@@ -1,4 +1,8 @@
+package main;
 import javax.swing.JFrame;
+
+import screen.ScreenPanel;
+
 
 
 public class ProjectMedusa extends JFrame {
