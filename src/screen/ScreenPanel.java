@@ -1,4 +1,6 @@
 package screen;
+import items.Bullet;
+
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -126,7 +128,7 @@ public class ScreenPanel extends JPanel implements KeyListener{
 
 		@Override
 		public void mouseClicked(MouseEvent arg0) {
-			// TODO Auto-generated method stub
+			map.addBullet(new Bullet(map.getChar().getX(), map.getChar().getY(), arg0.getX(), arg0.getY()));
 			
 		}
 

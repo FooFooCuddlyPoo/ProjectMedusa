@@ -1,8 +1,11 @@
 package map;
 
+import items.Bullet;
+
 import java.awt.Graphics;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.awt.*;
 
@@ -18,8 +21,11 @@ public class Map {
 	
 	private Character character;
 	
+	private ArrayList<Bullet> bullets;
+	
 	public Map(String filename){
 		file = filename;
+		bullets = new ArrayList<Bullet>();
 		readMap();
 	}
 	
@@ -59,17 +65,17 @@ public class Map {
 			for(int w = 0; w < tiles[0].length; w++){
 				if(tiles[h][w] != null){
 					tiles[h][w].draw(g);
-					if(tiles[h][w].getHitbox() != null)
-						tiles[h][w].getHitbox().draw(g);
 				}
 			}
 		}
 		
 		if(character != null){
 			character.draw(g);
-			character.getFeetHitbox().draw(g);
 		}
-			
+		
+		for(Bullet b: bullets){
+			b.draw(g);
+		}
 	}
 	
 	private Tile getTileType(int num, int x, int y) {
@@ -79,6 +85,10 @@ public class Map {
 			return new Floor(x*Tile.TILE_WIDTH, y*Tile.TILE_HEIGHT);
 		else
 			return null;
+	}
+	
+	public void addBullet(Bullet b){
+		bullets.add(b);
 	}
 
 	public Tile[][] getTiles() {
