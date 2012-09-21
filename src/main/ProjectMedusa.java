@@ -26,8 +26,15 @@ public class ProjectMedusa extends JFrame {
 	            "null"));
 		add(sc);
 		this.setVisible(true);
+		
+		long time = System.currentTimeMillis();
+		
 		while (true){
-			sc.repaint();
+			
+			if(System.currentTimeMillis() - time > 30){
+				sc.repaint();
+				time = System.currentTimeMillis();
+			}
 		}
 		
 	}

@@ -4,7 +4,7 @@ import java.awt.Graphics;
 import map.Tile;
 
 public class Character {
-	private final double speed = 0.8;
+	private final double speed = 3.5;
 	
 	public static final int CHAR_WIDTH = 32;
 	public static final int CHAR_HEIGHT = 60;
@@ -40,8 +40,6 @@ public class Character {
 
 
 	public void move(Tile tiles[][]) {
-		
-		
 			if(movingLeft){
 				this.x -= speed;
 				direction = 1;
