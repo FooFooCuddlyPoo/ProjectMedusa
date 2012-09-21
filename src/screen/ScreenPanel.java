@@ -128,7 +128,7 @@ public class ScreenPanel extends JPanel implements KeyListener{
 
 		@Override
 		public void mouseClicked(MouseEvent arg0) {
-			map.addBullet(new Bullet(map.getChar().getX(), map.getChar().getY(), arg0.getX(), arg0.getY()));
+		map.addBullet(new Bullet(map.getChar().getX(), map.getChar().getY(), arg0.getX(), arg0.getY()));
 			
 		}
 
