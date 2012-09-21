@@ -121,15 +121,15 @@ public class Character {
 	}
 	
 	public int getHealth(){
-		return (int) health;
+		return health;
 	}
 	
 	public int getHunger(){
-		return (int) hunger;
+		return hunger;
 	}
 	
 	public int getStamina(){
-		return (int) stamina;
+		return stamina;
 	}
 	
 	public void damageHealth(int damage){

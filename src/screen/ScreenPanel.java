@@ -30,6 +30,7 @@ public class ScreenPanel extends JPanel implements KeyListener{
 	private int mouseX;
 	private int mouseY;
 	private Graphics2D bufferGraphics;
+	private Hud hud;
 	private long lastTime;
 
 	
@@ -47,6 +48,7 @@ public class ScreenPanel extends JPanel implements KeyListener{
 		map = new Map("Levels/testLevel.txt");
 		camera = new Camera(map.getChar().getX() + (map.getChar().CHAR_WIDTH/2), map.getChar().getY() + (map.getChar().CHAR_HEIGHT/2));
 		cursor = new Cursor(512, 384);
+		hud = new Hud(map.getChar().getHealth(), map.getChar().getHunger(), map.getChar().getStamina());
 	}
 	
 	public void paintComponent(Graphics g){
@@ -69,12 +71,14 @@ public class ScreenPanel extends JPanel implements KeyListener{
 		map.draw(g);
 		g.translate(camera.getX(), camera.getY());
 		cursor.draw(g);
+		hud.draw(g);
 	}
 
 	public void update(){
 		map.getChar().move(map.getTiles());
 		camera.setCamera(map.getChar().getX() + (map.getChar().CHAR_WIDTH/2), map.getChar().getY() + (map.getChar().CHAR_HEIGHT));
 		cursor.setCur(mouseX, mouseY);
+		hud.setStats(map.getChar().getHealth(), map.getChar().getHunger(), map.getChar().getStamina());
 	}
 	
 	@Override
@@ -128,8 +132,7 @@ public class ScreenPanel extends JPanel implements KeyListener{
 
 		@Override
 		public void mouseClicked(MouseEvent arg0) {
-		map.addBullet(new Bullet(map.getChar().getX(), map.getChar().getY(), arg0.getX(), arg0.getY()));
-			
+			map.addBullet(new Bullet(map.getChar().getX(), map.getChar().getY(), arg0.getX(), arg0.getY()));
 		}
 
 		@Override
