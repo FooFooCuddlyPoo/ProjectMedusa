@@ -60,6 +60,13 @@ public class Map {
 		
 	}
 	
+	public void update(){
+		character.move(tiles);
+		for(Bullet b: bullets){
+			b.move();
+		}
+	}
+	
 	public void draw(Graphics2D g){
 		for(int h = 0; h < tiles.length; h++){
 			for(int w = 0; w < tiles[0].length; w++){

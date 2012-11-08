@@ -132,6 +132,9 @@ public class Character {
 	
 	public void damageHealth(int damage){
 		health = health - damage;
+		if(health > 100){
+			health = 100;
+		}
 		if (health < 0){
 			health = 0;
 		}

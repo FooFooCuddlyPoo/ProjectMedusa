@@ -15,15 +15,17 @@ public class Bullet {
 	
 	private Hitbox h;
 	
-	private static final int speed = 5;
+	private static final int speed = 10;
 	private static final int BULLET_WIDTH = 8;
 	private static final int BULLET_HEIGHT = 8;
 	
 	public Bullet(int origX, int origY, int destX, int destY){
+		System.out.println("bullet constructor got called");
 		x = origX;
-		x = origY;
+		y = origY;
 		
 		double angle = Math.tan((destY - origY)/(destX - origX));
+		System.out.println("angle is: "+angle);
 		
 		xSpeed = (int) (Math.cos(angle)*speed);
 		ySpeed = (int) (Math.sin(angle)*speed);

@@ -75,7 +75,7 @@ public class ScreenPanel extends JPanel implements KeyListener{
 	}
 
 	public void update(){
-		map.getChar().move(map.getTiles());
+		map.update();
 		camera.setCamera(map.getChar().getX() + (map.getChar().CHAR_WIDTH/2), map.getChar().getY() + (map.getChar().CHAR_HEIGHT));
 		cursor.setCur(mouseX, mouseY);
 		hud.setStats(map.getChar().getHealth(), map.getChar().getHunger(), map.getChar().getStamina());
@@ -91,6 +91,14 @@ public class ScreenPanel extends JPanel implements KeyListener{
 			map.getChar().setMovingRight(true);
 		if(k.getKeyCode() == KeyEvent.VK_S)
 			map.getChar().setMovingDown(true);
+		
+		if(k.getKeyCode() == KeyEvent.VK_U){     //TODO remove debugging code please
+			System.out.println("Health was: "+map.getChar().getHealth());
+			map.getChar().damageHealth(1);
+			System.out.println("Health now is: "+map.getChar().getHealth());
+		}
+		if(k.getKeyCode() == KeyEvent.VK_I)
+			map.getChar().damageHealth(-1);
 		
 		if(k.getKeyCode() == KeyEvent.VK_ESCAPE)
 			System.exit(0);
@@ -111,7 +119,6 @@ public class ScreenPanel extends JPanel implements KeyListener{
 
 	@Override
 	public void keyTyped(KeyEvent arg0) {
-		// TODO Auto-generated method stub
 		
 	}
 	
@@ -132,7 +139,7 @@ public class ScreenPanel extends JPanel implements KeyListener{
 
 		@Override
 		public void mouseClicked(MouseEvent arg0) {
-			map.addBullet(new Bullet(map.getChar().getX(), map.getChar().getY(), arg0.getX(), arg0.getY()));
+			
 		}
 
 		@Override
@@ -149,7 +156,8 @@ public class ScreenPanel extends JPanel implements KeyListener{
 
 		@Override
 		public void mousePressed(MouseEvent arg0) {
-			// TODO Auto-generated method stub
+			System.out.println("mouse clicked");
+			map.addBullet(new Bullet(map.getChar().getX(), map.getChar().getY(), arg0.getX(), arg0.getY()));
 			
 		}
 
