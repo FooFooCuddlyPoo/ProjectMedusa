@@ -92,10 +92,8 @@ public class ScreenPanel extends JPanel implements KeyListener{
 		if(k.getKeyCode() == KeyEvent.VK_S)
 			map.getChar().setMovingDown(true);
 		
-		if(k.getKeyCode() == KeyEvent.VK_U){     //TODO remove debugging code please
-			System.out.println("Health was: "+map.getChar().getHealth());
+		if(k.getKeyCode() == KeyEvent.VK_U){
 			map.getChar().damageHealth(1);
-			System.out.println("Health now is: "+map.getChar().getHealth());
 		}
 		if(k.getKeyCode() == KeyEvent.VK_I)
 			map.getChar().damageHealth(-1);
@@ -157,7 +155,10 @@ public class ScreenPanel extends JPanel implements KeyListener{
 		@Override
 		public void mousePressed(MouseEvent arg0) {
 			System.out.println("mouse clicked");
-			map.addBullet(new Bullet(map.getChar().getX(), map.getChar().getY(), arg0.getX(), arg0.getY()));
+			int x = (arg0.getX()+camera.getX());
+			int y = arg0.getY() + camera.getY();
+			System.out.println("New Bullet created at ("+map.getChar().getX()+", "+ map.getChar().getY()+") heading to ("+x+", "+y+")");
+			map.addBullet(new Bullet(map.getChar().getX(), map.getChar().getY(), arg0.getX() + camera.getX(), arg0.getY() + camera.getY()));
 			
 		}
 

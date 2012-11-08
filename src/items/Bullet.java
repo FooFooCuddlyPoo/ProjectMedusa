@@ -20,15 +20,13 @@ public class Bullet {
 	private static final int BULLET_HEIGHT = 8;
 	
 	public Bullet(int origX, int origY, int destX, int destY){
-		System.out.println("bullet constructor got called");
 		x = origX;
 		y = origY;
 		
-		double angle = Math.tan((destY - origY)/(destX - origX));
-		System.out.println("angle is: "+angle);
-		
-		xSpeed = (int) (Math.cos(angle)*speed);
-		ySpeed = (int) (Math.sin(angle)*speed);
+	    double angle = Math.atan(((double)(destY - origY))/((double)(destX - origX)));
+	    
+	    xSpeed = (int)(speed*Math.acos(angle));
+	    ySpeed = (int)(speed*Math.asin(angle));
 		
 		img = new Sprite("Sprites/Bullet.png");
 		h = new Hitbox(x, y, BULLET_WIDTH, BULLET_HEIGHT);
