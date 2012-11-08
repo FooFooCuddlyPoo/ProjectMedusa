@@ -8,8 +8,8 @@ import characters.Sprite;
 public class Bullet {
 	private int x;
 	private int y;
-	private int xSpeed;
-	private int ySpeed;
+	private double xSpeed;
+	private double ySpeed;
 	
 	private Sprite img;
 	
@@ -25,8 +25,8 @@ public class Bullet {
 		
 	    double angle = Math.atan(((double)(destY - origY))/((double)(destX - origX)));
 	    
-	    xSpeed = (int)(speed*Math.acos(angle));
-	    ySpeed = (int)(speed*Math.asin(angle));
+	    xSpeed = (speed*Math.acos(angle));
+	    ySpeed = (speed*Math.asin(angle));
 		
 		img = new Sprite("Sprites/Bullet.png");
 		h = new Hitbox(x, y, BULLET_WIDTH, BULLET_HEIGHT);
