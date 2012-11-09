@@ -1,6 +1,6 @@
 package items;
 
-import map.Tile;
+import java.awt.Graphics;
 
 public class Inventory {
 
@@ -63,11 +63,11 @@ public class Inventory {
 		return false;
 	}
 
-	private void drawInventory() {
+	public void drawInventory(Graphics g) {
 		for (int h = 0; h < height; h++) {
 			for (int w = 0; w < width; w++) {
 				if (inventory[h][w] != null) {
-					inventory[h][w].draw(startX + h*area, startY + w*area);
+					inventory[h][w].draw(startX + h*area, startY + w*area, g);
 				}
 			}
 		}

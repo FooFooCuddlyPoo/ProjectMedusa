@@ -78,6 +78,7 @@ public class Map {
 		
 		if(character != null){
 			character.draw(g);
+			character.getFeetHitbox().draw(g);
 		}
 		
 		for(Bullet b: bullets){
