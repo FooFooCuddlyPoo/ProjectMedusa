@@ -31,7 +31,7 @@ public class Character {
 		health = 100;
 		hunger = 100;
 		stamina = 100;
-		feetHitbox = new Hitbox(x, y + 40, CHAR_WIDTH, CHAR_HEIGHT - 40);
+		feetHitbox = new Hitbox(x, y + 40, CHAR_WIDTH - 9, CHAR_HEIGHT - 40);
 		bodyHitbox = new Hitbox(x, y, CHAR_WIDTH, CHAR_HEIGHT);
 		img = new Sprite("Sprites/Character.png");
 		direction = 3;

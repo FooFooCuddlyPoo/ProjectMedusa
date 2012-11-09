@@ -14,6 +14,7 @@ public class Hud {
 	private Sprite img;
 	
 	private final int healthBarWidth = 198;
+	private final int smallBarWidth = 161;
 	
 	public Hud(int health, int hunger, int stamina){
 		setStats(health, hunger, stamina);
@@ -25,6 +26,10 @@ public class Hud {
 		bg.draw(g, 0, 0, 300, 104, 0, 0);
 		g.setColor(Color.red);
 		g.fillRect(97, 42, (int)(healthBarWidth*(health/100.0)), 19);
+		g.setColor(Color.green);
+		g.fillRect(79, 76, (int)(smallBarWidth*(stamina/100.0)), 13);
+		g.setColor(Color.yellow);
+		g.fillRect(79, 13, (int)(smallBarWidth*(hunger/100.0)), 13);
 		img.draw(g, 0, 0, 300, 104, 0, 0);
 	}
 
