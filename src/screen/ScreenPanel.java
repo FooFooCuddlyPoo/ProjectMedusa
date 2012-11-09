@@ -1,5 +1,6 @@
 package screen;
 import items.Bullet;
+import items.Inventory;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -15,6 +16,7 @@ import java.awt.event.MouseMotionListener;
 
 import javax.swing.*;
 
+import main.ProjectMedusa;
 import map.Map;
 
 
@@ -32,6 +34,7 @@ public class ScreenPanel extends JPanel implements KeyListener{
 	private Graphics2D bufferGraphics;
 	private Hud hud;
 	private long lastTime;
+    private Inventory inv;
 
 	
 	public ScreenPanel(){
@@ -47,8 +50,9 @@ public class ScreenPanel extends JPanel implements KeyListener{
 	public void init(){
 		map = new Map("Levels/testLevel.txt");
 		camera = new Camera(map.getChar().getX() + (map.getChar().CHAR_WIDTH/2), map.getChar().getY() + (map.getChar().CHAR_HEIGHT/2));
-		cursor = new Cursor(512, 384);
+		cursor = new Cursor(ProjectMedusa.SCREEN_WIDTH/2, ProjectMedusa.SCREEN_HEIGHT/2);
 		hud = new Hud(map.getChar().getHealth(), map.getChar().getHunger(), map.getChar().getStamina());
+		inv = new Inventory();
 	}
 	
 	public void paintComponent(Graphics g){
@@ -72,6 +76,8 @@ public class ScreenPanel extends JPanel implements KeyListener{
 		g.translate(camera.getX(), camera.getY());
 		cursor.draw(g);
 		hud.draw(g);
+		if(inv.isOpen())
+		    inv.draw(g);
 	}
 
 	public void update(){
@@ -100,6 +106,10 @@ public class ScreenPanel extends JPanel implements KeyListener{
 		
 		if(k.getKeyCode() == KeyEvent.VK_ESCAPE)
 			System.exit(0);
+		
+		if(k.getKeyCode() == KeyEvent.VK_E){
+		    inv.setOpen(!inv.isOpen());
+		}
 	}
 
 	@Override

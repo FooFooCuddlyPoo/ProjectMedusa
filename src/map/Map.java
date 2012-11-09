@@ -1,6 +1,7 @@
 package map;
 
 import items.Bullet;
+import items.Inventory;
 
 import java.awt.Graphics;
 import java.io.File;
@@ -113,4 +114,5 @@ public class Map {
 	public void setChar(Character character) {
 		this.character = character;
 	}
+
 }

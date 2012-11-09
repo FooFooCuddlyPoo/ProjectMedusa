@@ -1,5 +1,10 @@
 package items;
 
+import java.awt.Graphics;
+
+import characters.Sprite;
+
+import main.ProjectMedusa;
 import map.Tile;
 
 public class Inventory {
@@ -14,13 +19,16 @@ public class Inventory {
 	private static final int area = 100;
 	private static final int startX = 100;
 	private static final int startY = 100;
+	
+	private Sprite img;
 
 	private int count;
 
 	public Inventory() {
 		open = false;
-		inventory = new Item[width][height];
+		inventory = new Item[height][width];
 		count = 0;
+		img = new Sprite("Sprites/inventory.png");
 	}
 
 	public boolean isOpen() {
@@ -63,11 +71,12 @@ public class Inventory {
 		return false;
 	}
 
-	private void drawInventory() {
+	public void draw(Graphics g) {
+	    img.draw(g, ProjectMedusa.SCREEN_WIDTH/2, 0, ProjectMedusa.SCREEN_WIDTH/2, ProjectMedusa.SCREEN_HEIGHT, 0, 0);
 		for (int h = 0; h < height; h++) {
 			for (int w = 0; w < width; w++) {
 				if (inventory[h][w] != null) {
-					inventory[h][w].draw(startX + h*area, startY + w*area);
+					inventory[h][w].draw(g, w, h, area, area);
 				}
 			}
 		}
