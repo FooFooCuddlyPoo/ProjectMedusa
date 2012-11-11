@@ -46,6 +46,8 @@ public class Character {
 
 		if (running) {
 			currentSpeed = 2 * speed;
+		}else{
+		    currentSpeed = speed;
 		}
 
 		if (movingLeft) {

@@ -113,12 +113,16 @@ public class ScreenPanel extends JPanel implements KeyListener{
 		if(k.getKeyCode() == KeyEvent.VK_E){
 		    inv.setOpen(!inv.isOpen());
 		}
+		
+		System.out.println("Key pressed");
 	}
 
 	@Override
 	public void keyReleased(KeyEvent k) {
-		if(k.getKeyCode() == KeyEvent.VK_SHIFT)
+		if(k.getKeyCode() == KeyEvent.VK_SHIFT){
+		    System.out.println("shift releases");
 			map.getChar().setRunning(false);
+		}
 		if(k.getKeyCode() == KeyEvent.VK_A)
 			map.getChar().setMovingLeft(false);
 		if(k.getKeyCode() == KeyEvent.VK_W)
@@ -127,6 +131,7 @@ public class ScreenPanel extends JPanel implements KeyListener{
 			map.getChar().setMovingRight(false);
 		if(k.getKeyCode() == KeyEvent.VK_S)
 			map.getChar().setMovingDown(false);
+		
 		
 	}
 
