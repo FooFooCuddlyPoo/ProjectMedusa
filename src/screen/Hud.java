@@ -16,7 +16,7 @@ public class Hud {
 	private final int healthBarWidth = 198;
 	private final int smallBarWidth = 161;
 	
-	public Hud(int health, int hunger, int stamina){
+	public Hud(int health, double hunger, double stamina){
 		setStats(health, hunger, stamina);
 		bg = new Sprite("Sprites/LifebarBackground.png");
 		img = new Sprite("Sprites/Lifebar.png");
@@ -33,7 +33,7 @@ public class Hud {
 		img.draw(g, 0, 0, 300, 104, 0, 0);
 	}
 
-	public void setStats(int health, int hunger, int stamina) {
+	public void setStats(int health, double hunger, double stamina) {
 		this.health = health;
 		this.hunger = hunger;
 		this.stamina = stamina;

@@ -1,20 +1,24 @@
 package characters;
+
 import java.awt.Graphics;
 
 import map.Tile;
 
 public class Character {
 	private final double speed = 3.5;
-	
+	private boolean running = false;
+	private double currentSpeed = 3.5;
+
 	public static final int CHAR_WIDTH = 32;
 	public static final int CHAR_HEIGHT = 60;
+	public static final double hungerRate = 0.01;
 	private double x;
 	private double y;
 	private Hitbox feetHitbox;
 	private Hitbox bodyHitbox;
 	private int health;
-	private int hunger;
-	private int stamina;
+	private double hunger;
+	private double stamina;
 
 	private Sprite img;
 
@@ -38,71 +42,77 @@ public class Character {
 		spriteStage = 0;
 	}
 
-
 	public void move(Tile tiles[][]) {
-			if(movingLeft){
-				this.x -= speed;
-				direction = 1;
-				if (spriteStage >= 1 && spriteStage < 5)
-					spriteStage++;
-				else
-					spriteStage = 1;
-			}
-			if(movingUp){
-				this.y -= speed;
-				direction = 2;
-				if (spriteStage >= 1 && spriteStage < 5)
-					spriteStage++;
-				else
-					spriteStage = 1;
-			}
-			if(movingRight){
+
+		if (running) {
+			currentSpeed = 2 * speed;
+		}
+
+		if (movingLeft) {
+			this.x -= currentSpeed;
+			direction = 1;
+			if (spriteStage >= 1 && spriteStage < 5)
+				spriteStage++;
+			else
+				spriteStage = 1;
+		}
+		if (movingUp) {
+			this.y -= currentSpeed;
+			direction = 2;
+			if (spriteStage >= 1 && spriteStage < 5)
+				spriteStage++;
+			else
+				spriteStage = 1;
+		}
+		if (movingRight) {
+			this.x += currentSpeed;
+			direction = 3;
+			if (spriteStage >= 1 && spriteStage < 5)
+				spriteStage++;
+			else
+				spriteStage = 1;
+		}
+		if (movingDown) {
+			this.y += currentSpeed;
+			direction = 0;
+			if (spriteStage >= 1 && spriteStage < 5)
+				spriteStage++;
+			else
+				spriteStage = 1;
+		}
+
+		if (!movingUp && !movingRight && !movingLeft && !movingDown)
+			spriteStage = 0;
+
+		feetHitbox.setX((int) this.x);
+		feetHitbox.setY((int) this.y + 40);
+
+		while (checkFeetCollision(tiles)) {
+			if (movingLeft)
 				this.x += speed;
-				direction = 3;
-				if (spriteStage >= 1 && spriteStage < 5)
-					spriteStage++;
-				else
-					spriteStage = 1;
-			}
-			if(movingDown){
+			feetHitbox.setX((int) this.x);
+			feetHitbox.setY((int) this.y + 40);
+			if (movingRight)
+				this.x -= speed;
+			feetHitbox.setX((int) this.x);
+			feetHitbox.setY((int) this.y + 40);
+			if (movingUp)
 				this.y += speed;
-				direction = 0;
-				if (spriteStage >= 1 && spriteStage < 5)
-					spriteStage++;
-				else
-					spriteStage = 1;
-			}
-			
-			if(!movingUp && !movingRight && !movingLeft && !movingDown)
-				spriteStage = 0;
-			
-			feetHitbox.setX((int)this.x);
-			feetHitbox.setY((int)this.y + 40);
-		
-			while (checkFeetCollision(tiles)){
-				if (movingLeft)
-					this.x += speed;
-					feetHitbox.setX((int)this.x);
-					feetHitbox.setY((int)this.y + 40);
-				if (movingRight)
-					this.x -= speed;
-					feetHitbox.setX((int)this.x);
-					feetHitbox.setY((int)this.y + 40);
-				if (movingUp)
-					this.y += speed;
-					feetHitbox.setX((int)this.x);
-					feetHitbox.setY((int)this.y + 40);
-				if (movingDown)
-					this.y -= speed;
-					feetHitbox.setX((int)this.x);
-					feetHitbox.setY((int)this.y + 40);
-			}
+			feetHitbox.setX((int) this.x);
+			feetHitbox.setY((int) this.y + 40);
+			if (movingDown)
+				this.y -= speed;
+			feetHitbox.setX((int) this.x);
+			feetHitbox.setY((int) this.y + 40);
+		}
 	}
-	
+
 	public boolean checkFeetCollision(Tile[][] tiles) {
 		for (int h = 0; h < tiles.length; h++) {
 			for (int w = 0; w < tiles[0].length; w++) {
-				if (tiles[h][w].getHitbox() != null && getFeetHitbox().collisionCheck(tiles[h][w].getHitbox())){
+				if (tiles[h][w].getHitbox() != null
+						&& getFeetHitbox().collisionCheck(
+								tiles[h][w].getHitbox())) {
 					return true;
 				}
 			}
@@ -111,57 +121,72 @@ public class Character {
 	}
 
 	public int getX() {
-		return (int)x;
+		return (int) x;
 	}
 
 	public int getY() {
-		return (int)y;
+		return (int) y;
 	}
-	
-	public int getHealth(){
+
+	public int getHealth() {
 		return health;
 	}
-	
-	public int getHunger(){
+
+	public double getHunger() {
 		return hunger;
 	}
-	
-	public int getStamina(){
+
+	public double getStamina() {
 		return stamina;
 	}
 	
-	public void damageHealth(int damage){
+	public boolean getRunning(){
+		return running;
+	}
+	
+	public void setRunning(boolean set){
+		running = set;
+	}
+
+	public void damageHealth(int damage) {
 		health = health - damage;
-		if(health > 100){
+		if (health > 100) {
 			health = 100;
 		}
-		if (health < 0){
+		if (health < 0) {
 			health = 0;
 		}
 	}
-	
-	public void damageHunger(int damage){
+
+	public void damageHunger(int damage) {
 		hunger = hunger - damage;
-		if (hunger < 0){
+		if (hunger < 0) {
 			hunger = 0;
 		}
 	}
-	
-	public void damageStamina(int damage){
+
+	public void naturalHunger() {
+		hunger = hunger - hungerRate;
+		if (stamina >= hunger) {
+			stamina = hunger;
+		}
+	}
+
+	public void damageStamina(double damage) {
 		stamina = stamina - damage;
-		if (stamina < 0){
+		if (stamina < 0) {
 			stamina = 0;
 		}
 	}
-	
+
 	public String toString() {
 		return "X: " + x + " Y: " + y;
 	}
 
 	public void draw(Graphics g) {
-		img.draw(g, (int)x, (int)y, CHAR_WIDTH, CHAR_HEIGHT, spriteStage, direction);
+		img.draw(g, (int) x, (int) y, CHAR_WIDTH, CHAR_HEIGHT, spriteStage,
+				direction);
 	}
-
 
 	public Hitbox getFeetHitbox() {
 		return feetHitbox;

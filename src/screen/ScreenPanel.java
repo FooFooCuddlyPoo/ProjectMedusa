@@ -75,6 +75,7 @@ public class ScreenPanel extends JPanel implements KeyListener{
 		map.draw(g);
 		g.translate(camera.getX(), camera.getY());
 		cursor.draw(g);
+		map.getChar().naturalHunger();
 		hud.draw(g);
 		if(inv.isOpen())
 		    inv.draw(g);
@@ -89,6 +90,8 @@ public class ScreenPanel extends JPanel implements KeyListener{
 	
 	@Override
 	public void keyPressed(KeyEvent k) {
+		if(k.getKeyCode() == KeyEvent.VK_SHIFT)
+			map.getChar().setRunning(true);
 		if(k.getKeyCode() == KeyEvent.VK_A)
 			map.getChar().setMovingLeft(true);
 		if(k.getKeyCode() == KeyEvent.VK_W)
@@ -114,6 +117,8 @@ public class ScreenPanel extends JPanel implements KeyListener{
 
 	@Override
 	public void keyReleased(KeyEvent k) {
+		if(k.getKeyCode() == KeyEvent.VK_SHIFT)
+			map.getChar().setRunning(false);
 		if(k.getKeyCode() == KeyEvent.VK_A)
 			map.getChar().setMovingLeft(false);
 		if(k.getKeyCode() == KeyEvent.VK_W)
