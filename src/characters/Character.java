@@ -1,10 +1,13 @@
 package characters;
 
+import items.Bullet;
+
 import java.awt.Graphics;
 
 import map.Tile;
 
 public class Character {
+	
 	private final double speed = 3.5;
 	private boolean running = false;
 	private double currentSpeed = 3.5;
@@ -19,6 +22,7 @@ public class Character {
 	private int health;
 	private double hunger;
 	private double stamina;
+	private String currentWeapon;
 
 	private Sprite img;
 
@@ -210,4 +214,11 @@ public class Character {
 		this.movingDown = movingDown;
 	}
 
+	public String getCurrentWeapon() {
+		return currentWeapon;
+	}
+
+	public void setCurrentWeapon(String currentWeapon) {
+		this.currentWeapon = currentWeapon;
+	}
 }

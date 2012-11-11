@@ -115,5 +115,18 @@ public class Map {
 	public void setChar(Character character) {
 		this.character = character;
 	}
+	
+//Check the ammo for the weapon, then fire the relevant amount of bullets
+	public void fireWeapon(int inX, int inY){
+		if(checkAmmo()){
+			if (getChar().getCurrentWeapon().equals("Pistol")){
+				addBullet(new Bullet(getChar().getX(), getChar().getY(), inX, inY));
+			}
+		}
+	}
+	
+	public boolean checkAmmo(){
+		return false;
+	}
 
 }
