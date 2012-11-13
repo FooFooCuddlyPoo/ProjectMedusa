@@ -2,16 +2,16 @@ package items;
 
 import java.awt.Graphics;
 
-import characters.Sprite;
+import characters.Image;
 
 public class Food implements Item {
 	
 	String type;
-	Sprite img;
+	Image img;
 	
 	public Food(String foodType){
 		type = foodType;		
-		img = new Sprite("Sprites/" + type + ".png");
+		img = new Image("Sprites/" + type + ".png");
 	}
 
 	public void setType(String type) {

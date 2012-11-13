@@ -31,7 +31,6 @@ public class ScreenPanel extends JPanel implements KeyListener {
 	private Graphics2D bufferGraphics;
 	private Hud hud;
 	private long lastTime;
-	private Inventory inv;
 
 	public ScreenPanel() {
 		setFocusable(true);
@@ -52,7 +51,6 @@ public class ScreenPanel extends JPanel implements KeyListener {
 				ProjectMedusa.SCREEN_HEIGHT / 2);
 		hud = new Hud(map.getChar().getHealth(), map.getChar().getHunger(), map
 				.getChar().getStamina());
-		inv = new Inventory();
 	}
 
 	public void paintComponent(Graphics g) {
@@ -71,27 +69,31 @@ public class ScreenPanel extends JPanel implements KeyListener {
 
 	public void mainLoop(Graphics2D g) {
 		update();
-		g.translate(-camera.getX(), -camera.getY());
-		map.draw(g);
-		g.translate(camera.getX(), camera.getY());
+		if(map.getChar().getInv().isOpen()){   //TODO fix the moving off screen when inventory open (camera)
+		    g.translate(-camera.getX()/2, -camera.getY());
+            map.draw(g);
+            g.translate(camera.getX()/2, camera.getY());
+        }else{
+            g.translate(-camera.getX(), -camera.getY());
+            map.draw(g);
+            g.translate(camera.getX(), camera.getY());
+        }
+
 		cursor.draw(g);
-		// Running and Stamina
-		if (map.getChar().getRunning()) {
-			map.getChar().damageStamina(0.8);
-		} else {
-			map.getChar().damageStamina(-0.4);
-		}
-		// Natural Hunger decay
-		map.getChar().naturalHunger();
+		
 		hud.draw(g);
-		if (inv.isOpen())
-			inv.draw(g);
+		if(map.getChar().getInv().isOpen()){
+		    map.getChar().getInv().draw(g);
+		}
+
 	}
 
 	public void update() {
 		map.update();
-		camera.setCamera(map.getChar().getX() + (map.getChar().CHAR_WIDTH / 2),
-				map.getChar().getY() + (map.getChar().CHAR_HEIGHT));
+		if(map.getChar().getInv().isOpen())
+		    camera.setCamera((map.getChar().getX() + (map.getChar().CHAR_WIDTH / 2))*2, map.getChar().getY() + (map.getChar().CHAR_HEIGHT));
+		else
+		    camera.setCamera(map.getChar().getX() + (map.getChar().CHAR_WIDTH / 2), map.getChar().getY() + (map.getChar().CHAR_HEIGHT));
 		cursor.setCur(mouseX, mouseY);
 		hud.setStats(map.getChar().getHealth(), map.getChar().getHunger(), map
 				.getChar().getStamina());
@@ -122,7 +124,7 @@ public class ScreenPanel extends JPanel implements KeyListener {
 			System.exit(0);
 
 		if (k.getKeyCode() == KeyEvent.VK_E) {
-			inv.setOpen(!inv.isOpen());
+			map.getChar().getInv().setOpen(!map.getChar().getInv().isOpen());
 		}
 	}
 

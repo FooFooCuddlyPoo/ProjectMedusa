@@ -4,7 +4,7 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
 import characters.Hitbox;
-import characters.Sprite;
+import characters.Image;
 
 
 public class Wall implements Tile{
@@ -13,7 +13,7 @@ public class Wall implements Tile{
 	
 	private Hitbox h;
 	
-	private Sprite img;
+	private Image img;
 	
 	public Wall(int x, int y){
 		this.x = x;
@@ -21,7 +21,7 @@ public class Wall implements Tile{
 		
 		h = new Hitbox(x, y, Tile.TILE_WIDTH, Tile.TILE_HEIGHT);
 		
-		img = new Sprite("Sprites/wall.png");
+		img = new Image("Sprites/wall.png");
 	}
 	
 	public int getX() {

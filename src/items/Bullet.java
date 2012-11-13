@@ -3,7 +3,7 @@ package items;
 import java.awt.Graphics;
 
 import characters.Hitbox;
-import characters.Sprite;
+import characters.Image;
 
 public class Bullet {
     private int x;
@@ -11,7 +11,7 @@ public class Bullet {
     private double xSpeed;
     private double ySpeed;
 
-    private Sprite img;
+    private Image img;
 
     private Hitbox h;
 
@@ -26,7 +26,7 @@ public class Bullet {
         xSpeed = (destX - origX)/speed;
         ySpeed = (destY - origY)/speed;
 
-        img = new Sprite("Sprites/Bullet.png");
+        img = new Image("Sprites/Bullet.png");
         h = new Hitbox(x, y, BULLET_WIDTH, BULLET_HEIGHT);
     }
 

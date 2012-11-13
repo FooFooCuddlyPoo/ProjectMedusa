@@ -2,7 +2,7 @@ package items;
 
 import java.awt.Graphics;
 
-import characters.Sprite;
+import characters.Image;
 
 import main.ProjectMedusa;
 import map.Tile;
@@ -20,7 +20,7 @@ public class Inventory {
 	private static final int startX = 100;
 	private static final int startY = 100;
 	
-	private Sprite img;
+	private Image img;
 
 	private int count;
 
@@ -28,7 +28,7 @@ public class Inventory {
 		open = false;
 		inventory = new Item[height][width];
 		count = 0;
-		img = new Sprite("Sprites/inventory.png");
+		img = new Image("Sprites/inventory.png");
 	}
 
 	public boolean isOpen() {

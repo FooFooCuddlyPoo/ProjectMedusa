@@ -7,11 +7,11 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 
-public class Sprite {
+public class Image {
 	private String file;
 	private BufferedImage img;
 	
-	public Sprite(String filename){
+	public Image(String filename){
 		file = filename;
 		
 		try {

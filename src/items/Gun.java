@@ -2,16 +2,16 @@ package items;
 
 import java.awt.Graphics;
 
-import characters.Sprite;
+import characters.Image;
 
 public class Gun implements Item {
 
 	String type;
-	Sprite img;
+	Image img;
 	
 	public Gun( String gunType){
 		type = gunType;		
-		img = new Sprite("Sprites/" + type + ".png");
+		img = new Image("Sprites/" + type + ".png");
 	}
 
 	public void setType(String type) {

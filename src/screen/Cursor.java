@@ -2,19 +2,19 @@ package screen;
 
 import java.awt.Graphics;
 
-import characters.Sprite;
+import characters.Image;
 
 public class Cursor {
 	private int x;
 	private int y;
 	private final int width  = 40;
 	private final int height = 40;
-	private Sprite img;
+	private Image img;
 	
 	public Cursor(int x, int y){
 		this.x = x;
 		this.y = y;
-		img = new Sprite("Sprites/Reticle.png");
+		img = new Image("Sprites/Reticle.png");
 	}
 	
 	public void draw(Graphics g){

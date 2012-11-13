@@ -2,18 +2,18 @@ package items;
 
 import java.awt.Graphics;
 
-import characters.Sprite;
+import characters.Image;
 
 public class Ammo implements Item {
 
 	int quantity;
 	String type;
-	Sprite img;
+	Image img;
 	
 	public Ammo( int amount, String ammoType){
 		quantity = amount;
 		type = ammoType;		
-		img = new Sprite("Sprites/" + type + "Ammo.png");
+		img = new Image("Sprites/" + type + "Ammo.png");
 	}
 	
 	public int getLevel() {

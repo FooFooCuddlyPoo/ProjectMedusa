@@ -3,23 +3,23 @@ package screen;
 import java.awt.Color;
 import java.awt.Graphics;
 
-import characters.Sprite;
+import characters.Image;
 
 public class Hud {
 	private double health;
 	private double hunger;
 	private double stamina;
 	
-	private Sprite bg;
-	private Sprite img;
+	private Image bg;
+	private Image img;
 	
 	private final int healthBarWidth = 198;
 	private final int smallBarWidth = 161;
 	
 	public Hud(int health, double hunger, double stamina){
 		setStats(health, hunger, stamina);
-		bg = new Sprite("Sprites/LifebarBackground.png");
-		img = new Sprite("Sprites/Lifebar.png");
+		bg = new Image("Sprites/LifebarBackground.png");
+		img = new Image("Sprites/Lifebar.png");
 	}
 	
 	public void draw(Graphics g){

@@ -3,7 +3,7 @@ package map;
 import java.awt.Graphics;
 
 import characters.Hitbox;
-import characters.Sprite;
+import characters.Image;
 
 
 public class Floor implements Tile{
@@ -11,13 +11,13 @@ public class Floor implements Tile{
 	private int x;
 	private int y;
 	
-	private Sprite img;
+	private Image img;
 	
 	public Floor(int x, int y){
 		this.x = x;
 		this.y = y;
 		
-		img = new Sprite("Sprites/floor.png");
+		img = new Image("Sprites/floor.png");
 	}
 	
 	public int getX() {
