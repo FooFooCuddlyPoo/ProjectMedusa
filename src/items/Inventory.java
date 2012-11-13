@@ -63,6 +63,28 @@ public class Inventory {
 		count--;
 		return temp;
 	}
+	
+	public boolean contains(String search){
+		for (int f = 0; f < width; f++){
+			for (int k = 0; k < height; k++){
+				if (inventory[f][k].returnName().equals(search)){
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+	
+	public Item returnItem(String search){
+		for (int f = 0; f < width; f++){
+			for (int k = 0; k < height; k++){
+				if (inventory[f][k].returnName().equals(search)){
+					return inventory[f][k];
+				}
+			}
+		}
+		return null;
+	}
 
 	private boolean isFull() {
 		if (count == 12) {

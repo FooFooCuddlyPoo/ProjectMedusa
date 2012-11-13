@@ -1,6 +1,7 @@
 package characters;
 
 import items.Inventory;
+import items.Item;
 
 import java.awt.Graphics;
 
@@ -23,6 +24,7 @@ public class Character {
     private double hunger;
     private double stamina;
     private String currentWeapon;
+    private int runningTimer;
 
     private Image img;
 
@@ -54,12 +56,17 @@ public class Character {
     }
 
     public void move(Tile tiles[][]) {
-        if (running) {
+    	if (stamina == 0) setRunning (false);
+        if (running && (movingUp || movingRight || movingLeft || movingDown)) {
             currentSpeed = 2 * speed;
-            damageStamina(0.8);
+            runningTimer = 0;
+            damageStamina (0.8);
         } else {
             currentSpeed = speed;
+            runningTimer ++;
+            if (runningTimer > 60){
             damageStamina(-0.4);
+            }
         }
 
         if (movingLeft) {
@@ -148,6 +155,16 @@ public class Character {
         }
     }
     
+    private void swapGun(){
+    }
+    
+    private void fireGun(){
+    	//Check timer to see if previous bullet was fired recently for machine-guns
+    	Item ammo = inv.returnItem(currentWeapon + "Ammo");
+    	//Check Ammo
+    	//Fire bullets according to gun
+    }
+    
     public void draw(Graphics g) {
         this.naturalHunger();
         img.draw(g, (int) x, (int) y, CHAR_WIDTH, CHAR_HEIGHT, spriteStage, direction.value());
@@ -165,8 +182,6 @@ public class Character {
     public Hitbox getFeetHitbox() {return feetHitbox;}
     public String getCurrentWeapon() {return currentWeapon;}
     public Inventory getInv()   {return inv;}
-
-
 
     //---------------------------------------------------
     //-----------------Setters---------------------------
