@@ -69,7 +69,7 @@ public class ScreenPanel extends JPanel implements KeyListener {
 
 	public void mainLoop(Graphics2D g) {
 		update();
-		if(map.getChar().getInv().isOpen()){   //TODO fix the moving off screen when inventory open (camera)
+		if(map.getChar().getInv().isOpen()){
 		    g.translate(-camera.getX()/2, -camera.getY());
             map.draw(g);
             g.translate(camera.getX()/2, camera.getY());
@@ -189,9 +189,11 @@ public class ScreenPanel extends JPanel implements KeyListener {
 				System.out.println("New Bullet created at ("
 						+ map.getChar().getX() + ", " + map.getChar().getY()
 						+ ") heading to (" + x + ", " + y + ")");
-				map.addBullet(new Bullet(map.getChar().getX(), map.getChar()
-						.getY(), arg0.getX() + camera.getX(), arg0.getY()
-						+ camera.getY()));
+				
+				if(map.getChar().getInv().isOpen())
+				    map.addBullet(new Bullet(map.getChar().getX(), map.getChar().getY(), arg0.getX() + camera.getX()/2, arg0.getY() + camera.getY()));
+				else
+                    map.addBullet(new Bullet(map.getChar().getX(), map.getChar().getY(), arg0.getX() + camera.getX(), arg0.getY() + camera.getY()));
 			}
 			if (arg0.getButton() == 3) {
 				//Pick up item if within range

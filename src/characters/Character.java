@@ -166,7 +166,6 @@ public class Character {
     public String getCurrentWeapon() {return currentWeapon;}
     public Inventory getInv()   {return inv;}
 
-    
 
 
     //---------------------------------------------------
