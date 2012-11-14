@@ -9,8 +9,6 @@ import map.Tile;
 
 public class Inventory {
 
-	// Draw method (Draw items in 4 x 3 square)
-
 	private boolean open;
 	private Item[][] inventory;
 	private static final int width = 4;

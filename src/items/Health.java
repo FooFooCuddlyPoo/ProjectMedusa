@@ -21,6 +21,14 @@ public class Health implements Item {
 	public String returnName(){
 		return type;
 	}
+	
+	public int returnValue(){
+		return 0;
+	}
+	
+	public void use(){
+		//Gain health
+	}
 
 	@Override
     public void draw(Graphics g, int x, int y, int width, int height) {

@@ -21,6 +21,14 @@ public class Food implements Item {
 	public String returnName(){
 		return type;
 	}
+	
+	public int returnValue(){
+		return 0;
+	}
+	
+	public void use(){
+		//Eat and gain stamina
+	}
 
     @Override
     public void draw(Graphics g, int x, int y, int width, int height) {

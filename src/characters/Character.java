@@ -1,5 +1,6 @@
 package characters;
 
+import items.Bullet;
 import items.Inventory;
 import items.Item;
 
@@ -25,6 +26,11 @@ public class Character {
     private double stamina;
     private String currentWeapon;
     private int runningTimer;
+    
+    private int machineTimer;
+    private int shotgunTimer;
+    private int revolverTimer;
+    private int crowbarTimer;
 
     private Image img;
 
@@ -56,6 +62,13 @@ public class Character {
     }
 
     public void move(Tile tiles[][]) {
+    	
+    	//Lower gun timers:
+    	machineTimer --;
+        shotgunTimer --;
+        revolverTimer --;
+        crowbarTimer --;
+    	
     	if (stamina == 0) setRunning (false);
         if (running && (movingUp || movingRight || movingLeft || movingDown)) {
             currentSpeed = 2 * speed;
@@ -155,14 +168,60 @@ public class Character {
         }
     }
     
-    private void swapGun(){
+    private void nextGun(){
     }
     
-    private void fireGun(){
+    private void previousGun(){
+    }
+    
+    private void fireGun(int x, int y){
     	//Check timer to see if previous bullet was fired recently for machine-guns
     	Item ammo = inv.returnItem(currentWeapon + "Ammo");
-    	//Check Ammo
-    	//Fire bullets according to gun
+    	if (ammo != null && ammo.returnValue() > 0){
+    		if (checkTimer(currentWeapon)){
+        		fireType(currentWeapon);
+    		}
+    	}
+    	else {
+    		System.out.println("NO AMMO");
+    	}
+    }
+    
+    private boolean checkTimer(String currentWeapon){
+    	if (currentWeapon.equals("MachineGun")){
+    		if (machineTimer < 0){
+    			machineTimer = 10;
+    			return true;
+    		} else {return false;}
+    	} else if (currentWeapon.equals("Pistol")){
+    		return true;
+    	}else if (currentWeapon.equals("Crowbar")){
+    		if (crowbarTimer < 0){
+    			crowbarTimer = 30;
+    			return true;
+    		} else {return false;}
+    	} else if (currentWeapon.equals("Revolver")){
+    		if (revolverTimer < 0){
+    			revolverTimer = 30;
+    			return true;
+    		} else {return false;}
+    	} else if (currentWeapon.equals("Shotgun")){
+    		if (shotgunTimer < 0){
+    			shotgunTimer = 30;
+    			return true;
+    		} else {return false;}
+    	}
+    	return false;
+    }
+    
+    private void fireType(String currentWeapon){
+		inv.returnItem(this.currentWeapon + "Ammo").use();
+    	if (currentWeapon.equals("MachineGun")){
+    	} else if (currentWeapon.equals("Pistol")){
+    	} else if (currentWeapon.equals("Crowbar")){
+    	} else if (currentWeapon.equals("Revolver")){
+    	} else if (currentWeapon.equals("Shotgun")){
+    	}
     }
     
     public void draw(Graphics g) {

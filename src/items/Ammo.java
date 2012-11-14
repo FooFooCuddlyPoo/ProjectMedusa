@@ -16,7 +16,7 @@ public class Ammo implements Item {
 		img = new Image("Sprites/" + type + "Ammo.png");
 	}
 	
-	public int getLevel() {
+	public int returnValue() {
 		return quantity;
 	}
 
